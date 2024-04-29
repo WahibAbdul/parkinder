@@ -1,16 +1,12 @@
 # parkinder
 
-A new Flutter project.
+Find the perfect parking spot using parkinder. Tinder like swipeable cards using **Riverpod** state-management and **GraphQL** api services.
 
-## Getting Started
+## Screenshots
 
-This project is a starting point for a Flutter application.
+<p>
+<img src="https://github.com/WahibAbdul/parkinder/blob/main/screenshots/like.png" alt="Screenshot 1" width="230" height="500">
+<img src="https://github.com/WahibAbdul/parkinder/blob/main/screenshots/dislike.png" alt="Screenshot 2" width="230" height="500">
+<img src="https://github.com/WahibAbdul/parkinder/blob/main/screenshots/history.png" alt="Screenshot 2" width="230" height="500">
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+</p>
