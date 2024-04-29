@@ -56,4 +56,8 @@ class ParkingLot {
       );
 
   bool get isActive => status == 'active';
+
+  bool get isHotel => type == 'hotel';
+
+  bool get isStore => type == 'store';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parkinder/common/constants/dimens.dart';
+import 'package:parkinder/common/constants/spacing.dart';
 import 'package:parkinder/common/extensions/string_extension.dart';
 import 'package:parkinder/features/history/enum/history_filter_type.dart';
 
@@ -10,18 +11,23 @@ class HistoryFilterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      alignment: WrapAlignment.start,
-      crossAxisAlignment: WrapCrossAlignment.start,
-      spacing: Dimens.margin,
-      children: [
-        for (var filter in HistoryFilterType.values)
-          ChoiceChip(
+    const filters = HistoryFilterType.values;
+    return SizedBox(
+      height: 50,
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(horizontal: Dimens.margin),
+        itemCount: filters.length,
+        scrollDirection: Axis.horizontal,
+        separatorBuilder: (context, index) => Spacing.hMedium,
+        itemBuilder: (context, index) {
+          final filter = filters[index];
+          return ChoiceChip(
             label: Text(filter.name.capitalized()),
             selected: selectedFilter == filter,
             onSelected: (selected) => onFilterChanged?.call(filter),
-          )
-      ],
+          );
+        },
+      ),
     );
   }
 }

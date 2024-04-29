@@ -5,13 +5,21 @@ import 'package:parkinder/features/home/enums/decision.dart';
 import 'package:parkinder/features/home/enums/parking_lot_filter.dart';
 import 'package:parkinder/features/home/providers/filtered_parking_lots_provider.dart';
 
-final historyParkingLotsProvider = Provider.family.autoDispose<List<ParkingLot>, HistoryFilterType>((ref, filter) {
+import 'history_selected_filter_provider.dart';
+
+final historyParkingLotsProvider = Provider.autoDispose<List<ParkingLot>>((ref) {
+  final filter = ref.watch(historySelectedFilterProvider);
+
   return ref.watch(filteredParkingLotsProvider(ParkingLotFilter.decided).select((data) {
     final list = data.value ?? [];
     if (filter == HistoryFilterType.good) {
       return list.where((element) => element.decision == Decision.good).toList();
     } else if (filter == HistoryFilterType.bad) {
       return list.where((element) => element.decision == Decision.bad).toList();
+    } else if (filter == HistoryFilterType.hotel) {
+      return list.where((element) => element.isHotel).toList();
+    } else if (filter == HistoryFilterType.store) {
+      return list.where((element) => element.isStore).toList();
     }
     return list;
   }));
