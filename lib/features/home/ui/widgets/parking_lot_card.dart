@@ -28,6 +28,7 @@ class ParkingLotCard extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
+        color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(Dimens.cardRadius),
       ),
       clipBehavior: Clip.antiAlias,
