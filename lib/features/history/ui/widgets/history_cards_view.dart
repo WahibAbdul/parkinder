@@ -28,7 +28,7 @@ class HistoryCardsView extends StatelessWidget {
         itemBuilder: (context, index) {
           final parkingLot = parkingLots[index];
           return DecisionStamp(
-            isLike: parkingLot.decision == Decision.liked,
+            isGood: parkingLot.decision == Decision.good,
             isMini: true,
             child: ParkingLotCard(
               width: double.infinity,

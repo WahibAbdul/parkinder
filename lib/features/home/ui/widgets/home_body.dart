@@ -44,7 +44,7 @@ class HomeBody extends ConsumerWidget {
                     itemBuilder: (context, index, dragDirection) {
                       final parkingLot = parkingLots[index];
                       return DecisionStamp(
-                        isLike: dragDirection == Direction.left,
+                        isGood: dragDirection == Direction.left,
                         show: dragDirection != Direction.none,
                         child: ParkingLotCard(
                           parkingLot: parkingLot,
@@ -63,9 +63,9 @@ class HomeBody extends ConsumerWidget {
 
   Decision fromDirection(Direction direction) {
     return direction == Direction.right
-        ? Decision.liked
+        ? Decision.good
         : direction == Direction.left
-            ? Decision.disliked
+            ? Decision.bad
             : Decision.none;
   }
 }

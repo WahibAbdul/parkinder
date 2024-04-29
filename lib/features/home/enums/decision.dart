@@ -1,5 +1,5 @@
 enum Decision {
   none,
-  liked,
-  disliked;
+  good,
+  bad;
 }

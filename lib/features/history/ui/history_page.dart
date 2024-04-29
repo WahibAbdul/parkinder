@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:parkinder/common/constants/dimens.dart';
+import 'package:parkinder/common/constants/spacing.dart';
+import 'package:parkinder/features/history/enum/history_filter_type.dart';
+import 'package:parkinder/features/history/providers/history_parking_lots_provider.dart';
 import 'package:parkinder/features/history/ui/widgets/history_cards_view.dart';
-import 'package:parkinder/features/home/providers/filtered_parking_lots_provider.dart';
-import 'package:parkinder/features/home/enums/parking_lot_filter.dart';
+import 'package:parkinder/features/history/ui/widgets/history_filter_view.dart';
 
-class HistoryPage extends ConsumerWidget {
+class HistoryPage extends ConsumerStatefulWidget {
   const HistoryPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final decidedParkingLots = ref.watch(
-      filteredParkingLotsProvider(ParkingLotFilter.decided).select((value) => value.value ?? []),
-    );
+  ConsumerState<HistoryPage> createState() => _HistoryPageState();
+}
+
+class _HistoryPageState extends ConsumerState<HistoryPage> {
+  var _selectedFilter = HistoryFilterType.all;
+
+  @override
+  Widget build(BuildContext context) {
+    final decidedParkingLots = ref.watch(historyParkingLotsProvider(_selectedFilter));
 
     return Scaffold(
       appBar: AppBar(
@@ -26,11 +34,26 @@ class HistoryPage extends ConsumerWidget {
                 style: Theme.of(context).textTheme.titleMedium,
                 textAlign: TextAlign.center,
               ))
-            // GRID VIEW OF CARDS
-            : Center(
-                child: HistoryCardsView(
-                  parkingLots: decidedParkingLots,
-                ),
+            // BODY
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // FILTER VIEW
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: Dimens.margin),
+                    child: HistoryFilterView(
+                      selectedFilter: _selectedFilter,
+                      onFilterChanged: (filter) => setState(() => _selectedFilter = filter),
+                    ),
+                  ),
+                  Spacing.vertical,
+                  // CARDS VIEW
+                  Expanded(
+                    child: HistoryCardsView(
+                      parkingLots: decidedParkingLots,
+                    ),
+                  ),
+                ],
               ),
       ),
     );
